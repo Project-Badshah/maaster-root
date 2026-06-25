@@ -15,7 +15,7 @@ All developers and AI agents must read these documents before making architectur
 ## The Portfolio
 The holding company currently manages the following autonomous applications:
 
-- **[Maaster Landing](./apps/maaster-landing.md)**: The Next.js corporate holding company directory and public face (`maaster.online`).
+- **[Maaster Root](./apps/maaster-landing.md)**: The static corporate holding company directory (`maaster.online`) and central documentation hub.
 - **[Event Maaster](./apps/event-maaster.md)**: Marketing and landing gateway.
 - **[Hisab Maaster](./apps/hisab-maaster.md)**: Financial accounting & organization tracking.
 - **[Photo Maaster](./apps/photo-maaster.md)**: Photography delivery & gallery management.
