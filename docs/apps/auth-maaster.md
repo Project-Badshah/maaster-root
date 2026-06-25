@@ -4,9 +4,9 @@
 Auth Maaster is the supreme Single Sign-On (SSO) identity provider for the entire Project Badshah "House of Apps".
 
 ## Architecture
-It operates as a **Unified Hybrid Package**:
-1. **The Server**: It is a deployable Cloudflare Worker that serves live HTTP endpoints (e.g., OTP sending, JWT verification) backed by a central Neon PostgreSQL database.
-2. **The Library**: It is also an NPM package that can be installed by the other isolated Polyrepo apps (like Hisab Maaster or Dukan Maaster) to securely import its TypeScript types, database schemas, and cryptographic validation functions.
+It operates as a **Domain-Driven Mini-Monorepo** (pnpm workspace) containing two core packages:
+1. **`apps/auth-api`**: A deployable Cloudflare Worker that serves live HTTP endpoints (e.g., OTP sending, JWT verification) backed by a central Neon PostgreSQL database.
+2. **`packages/auth-sdk`**: An NPM package that can be installed by the other isolated Polyrepo apps (like Hisab Maaster or Dukan Maaster) to securely import its TypeScript types, database schemas, and cryptographic validation functions without breaking isolation rules.
 
 ## Centralized Identity Strategy (The "Google-Like" Approach)
 Rather than each app maintaining its own disjointed list of users:
