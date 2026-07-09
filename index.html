@@ -3,46 +3,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Badshah | Holding Company</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>MAASTER — Modern Automated Architecture</title>
+    <meta name="description" content="MAASTER — Modern Automated Architecture, Scalable Technology, Engineered Right. A portfolio of edge-native tech products.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000;
+            --white: #fff;
+            --muted: #52525b;
+            --muted-light: #a1a1aa;
+            --border: rgba(255,255,255,0.06);
+            --glow-1: rgba(99,102,241,0.15);
+            --glow-2: rgba(168,85,247,0.12);
+            --glow-3: rgba(236,72,153,0.08);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════════
+           AMBIENT GLOW LAYERS
+        ═══════════════════════════════════════════ */
+        .glow-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            animation: float 12s ease-in-out infinite;
+        }
+
+        .glow-orb.one {
+            width: 600px; height: 600px;
+            background: var(--glow-1);
+            top: -10%; left: -5%;
+            animation-delay: 0s;
+        }
+
+        .glow-orb.two {
+            width: 500px; height: 500px;
+            background: var(--glow-2);
+            bottom: -15%; right: -5%;
+            animation-delay: -4s;
+        }
+
+        .glow-orb.three {
+            width: 400px; height: 400px;
+            background: var(--glow-3);
+            top: 40%; left: 50%;
+            transform: translateX(-50%);
+            animation-delay: -8s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+            33% { transform: translate(30px, -20px) scale(1.05); opacity: 0.8; }
+            66% { transform: translate(-20px, 15px) scale(0.95); opacity: 0.5; }
+        }
+
+        /* Noise texture overlay */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px;
+        }
+
+        /* ═══════════════════════════════════════════
+           LAYOUT
+        ═══════════════════════════════════════════ */
+        .content { position: relative; z-index: 2; }
+
+        /* ═══════════════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 1.5rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border);
+            z-index: 200;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .nav-contact {
+            color: var(--muted-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.6rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 99px;
+            transition: all 0.25s;
+        }
+
+        .nav-contact:hover {
+            color: var(--white);
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* ═══════════════════════════════════════════
+           HERO — THE ACRONYM
+        ═══════════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 6% 6rem;
+        }
+
+        .hero-word {
+            font-size: clamp(5rem, 14vw, 12rem);
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            line-height: 0.95;
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.4) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3rem;
+        }
+
+        .acronym-full {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .acronym-line-1,
+        .acronym-line-2 {
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted-light);
+        }
+
+        .acronym-line-1 {
+            font-size: clamp(1rem, 2.5vw, 1.75rem);
+        }
+
+        .acronym-line-2 {
+            font-size: clamp(1rem, 2.5vw, 1.75rem);
+        }
+
+        .acronym-line-1 strong,
+        .acronym-line-2 strong {
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            margin: 2.5rem 0;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 1.8vw, 1.35rem);
+            font-weight: 300;
+            color: var(--muted);
+            max-width: 550px;
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════════
+           PRODUCTS — COMING SOON GRID
+        ═══════════════════════════════════════════ */
+        .products-section {
+            padding: 8rem 6% 10rem;
+        }
+
+        .products-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .products-header h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,0.6));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .products-header p {
+            color: var(--muted);
+            font-size: 1.15rem;
+            font-weight: 300;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            position: relative;
+            background: rgba(255,255,255,0.015);
+            border: 1px solid var(--border);
+            border-radius: 2rem;
+            padding: 2.75rem 2.25rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 2rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .product-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .product-card:hover::before { opacity: 1; }
+
+        .product-icon {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-desc {
+            color: var(--muted-light);
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .coming-soon-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: rgba(99,102,241,0.1);
+            color: #818cf8;
+            border: 1px solid rgba(99,102,241,0.15);
+        }
+
+        .coming-soon-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #818cf8;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        /* ═══════════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════════ */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 6%;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        footer .footer-acronym {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #3f3f46;
+            margin-top: 1rem;
+        }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .hero { padding: 10rem 6% 6rem; }
+            .glow-orb.one { width: 350px; height: 350px; }
+            .glow-orb.two { width: 300px; height: 300px; }
+            .glow-orb.three { width: 250px; height: 250px; }
+        }
+    </style>
 </head>
 <body>
-    <div class="background-glow"></div>
-    <main class="container">
-        <header class="hero">
-            <h1>Project Badshah</h1>
-            <p>The premier holding company powering the future of the event management industry.</p>
-        </header>
 
-        <section class="portfolio-grid">
-            <a href="https://event.maaster.online" class="card">
-                <h3>Event Maaster</h3>
-                <p>Marketing gateway and interactive ecosystem storefront.</p>
-            </a>
-            <a href="https://hisab.maaster.online" class="card">
-                <h3>Hisab Maaster</h3>
-                <p>Financial accounting and organization ledger tracking.</p>
-            </a>
-            <a href="https://photo.maaster.online" class="card">
-                <h3>Photo Maaster</h3>
-                <p>Photography delivery and client gallery management.</p>
-            </a>
-            <a href="https://dukan.maaster.online" class="card">
-                <h3>Dukan Maaster</h3>
-                <p>Headless enterprise e-commerce engine.</p>
-            </a>
-            <a href="https://invite.maaster.online" class="card">
-                <h3>Invite Maaster</h3>
-                <p>Interactive web-based digital event invitations.</p>
-            </a>
-            <a href="https://lyrics.maaster.online" class="card">
-                <h3>Lyrics Maaster (RiLycs)</h3>
-                <p>India-first live captioning and music recognition engine.</p>
-            </a>
+    <!-- Ambient Glow -->
+    <div class="glow-layer">
+        <div class="glow-orb one"></div>
+        <div class="glow-orb two"></div>
+        <div class="glow-orb three"></div>
+    </div>
+    <div class="noise"></div>
+
+    <div class="content">
+
+        <!-- Navigation -->
+        <nav>
+            <div class="nav-logo">MAASTER</div>
+            <a href="mailto:contact@maaster.online" class="nav-contact">Get in Touch</a>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-word">MAASTER</div>
+
+            <div class="acronym-full">
+                <div class="acronym-line-1">
+                    <strong>M</strong>odern &nbsp;<strong>A</strong>utomated &nbsp;<strong>A</strong>rchitecture
+                </div>
+                <div class="acronym-line-2">
+                    <strong>S</strong>calable &nbsp;<strong>T</strong>echnology, &nbsp;<strong>E</strong>ngineered &nbsp;<strong>R</strong>ight
+                </div>
+            </div>
+
+            <div class="hero-divider"></div>
+
+            <p class="hero-tagline">
+                A tech solutions company building a portfolio of independent, edge-native products that solve real problems.
+            </p>
         </section>
-    </main>
+
+        <!-- Products -->
+        <section class="products-section">
+            <div class="products-header">
+                <h2>The Portfolio</h2>
+                <p>Independent products. Shared philosophy.</p>
+            </div>
+
+            <div class="products-grid">
+
+                <div class="product-card">
+                    <div class="product-icon">🛒</div>
+                    <div class="product-name">Dukan Maaster</div>
+                    <div class="product-desc">Headless D2C commerce engine built for the Indian market. WhatsApp commerce and hyperlocal logistics baked in.</div>
+                    <div class="coming-soon-badge"><span class="dot"></span> Coming Soon</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">🎪</div>
+                    <div class="product-name">Event Maaster</div>
+                    <div class="product-desc">Marketing gateway and interactive event management platform with stunning, SEO-optimized storefronts.</div>
+                    <div class="coming-soon-badge"><span class="dot"></span> Coming Soon</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">📊</div>
+                    <div class="product-name">Hisab Maaster</div>
+                    <div class="product-desc">Secure financial accounting and expense tracking with strict log-only architecture and role-based access.</div>
+                    <div class="coming-soon-badge"><span class="dot"></span> Coming Soon</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">📸</div>
+                    <div class="product-name">Photo Maaster</div>
+                    <div class="product-desc">Photography delivery and client gallery management. Heavy asset payloads handled at the edge.</div>
+                    <div class="coming-soon-badge"><span class="dot"></span> Coming Soon</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">💌</div>
+                    <div class="product-name">Invite Maaster</div>
+                    <div class="product-desc">Interactive, web-based digital invitations with event-specific palettes and premium micro-interactions.</div>
+                    <div class="coming-soon-badge"><span class="dot"></span> Coming Soon</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">🎵</div>
+                    <div class="product-name">Lyrics Maaster</div>
+                    <div class="product-desc">India-first live captioning and music recognition engine. Four modes for every live audio experience.</div>
+                    <div class="coming-soon-badge"><span class="dot"></span> Coming Soon</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 MAASTER. All rights reserved.</p>
+            <p class="footer-acronym">Modern Automated Architecture — Scalable Technology, Engineered Right</p>
+        </footer>
+
+    </div>
+
 </body>
 </html>

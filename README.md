@@ -1,13 +1,29 @@
-# Project Badshah
+# MAASTER
 
-Welcome to the **Project Badshah** holding company monorepo folder. 
+**Modern Automated Architecture — Scalable Technology, Engineered Right.**
 
-This repository acts as the organizational umbrella for the Event Maaster Ecosystem. It consists of multiple, fully independent applications (a Polyrepo architecture) managed centrally.
+MAASTER is a tech solutions holding company operating a portfolio of independent, edge-native SaaS products.
 
-## 📚 Documentation Hub
+---
 
-All developers and AI agents must begin by reading the centralized holding company documentation:
+## The Portfolio
 
-👉 **[Start Here: Holding Company Index](./docs/00-holding-company-index.md)** 👈
+| Product | Domain | Description |
+| :--- | :--- | :--- |
+| [Dukan Maaster](https://github.com/vladimirpuneet/dukan-maaster) | [dukan.maaster.online](https://dukan.maaster.online) | Headless D2C commerce engine for the Indian market |
+| [Auth Maaster](https://github.com/vladimirpuneet/auth-maaster) | api.maaster.online | Unified SSO identity provider (JWT + WhatsApp OTP) |
+| [Event Maaster](https://github.com/vladimirpuneet/event-maaster) | [event.maaster.online](https://event.maaster.online) | Marketing gateway & event management platform |
+| [Hisab Maaster](https://github.com/vladimirpuneet/hisab-maaster) | [hisab.maaster.online](https://hisab.maaster.online) | Financial accounting & expense tracking |
+| [Photo Maaster](https://github.com/vladimirpuneet/photo-maaster) | [photo.maaster.online](https://photo.maaster.online) | Photography delivery & gallery management |
+| [Invite Maaster](https://github.com/vladimirpuneet/invite-maaster) | [invite.maaster.online](https://invite.maaster.online) | Interactive digital event invitations |
+| [Lyrics Maaster](https://github.com/vladimirpuneet/lyrics-maaster) | [lyrics.maaster.online](https://lyrics.maaster.online) | India-first live captioning & music recognition (RiLycs) |
 
-The index contains the critical structural rules, locked tech stack requirements, aesthetic laws, and summaries of every app within our portfolio.
+---
+
+## Architecture Principles
+
+- **Polyrepo**: Each product is an independent Git repository with its own `docs/`, dependencies, and deployment pipeline.
+- **HONC Stack**: Hono + Drizzle ORM + Neon Postgres + Cloudflare Workers.
+- **Edge-Native**: All APIs run on Cloudflare V8 Isolates. Zero idle cost.
+- **Shared Identity**: All products authenticate via Auth Maaster's centralized JWT infrastructure.
+- **Documentation Ownership**: Each repo owns its own docs. This repo is only an index.
